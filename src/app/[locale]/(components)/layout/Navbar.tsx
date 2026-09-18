@@ -191,30 +191,39 @@ const Navbar1 = () => {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="cursor-pointer text-white hover:bg-white/10 hover:text-white"
+                            className="cursor-pointer rounded-full text-white transition-all duration-200 hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
                           />
                         }
                       >
-                        <UserRound className="size-7" />
+                        <UserRound className="size-6" />
                       </DropdownMenuTrigger>
 
-                      <DropdownMenuContent>
+                      <DropdownMenuContent
+                        align="end"
+                        sideOffset={8}
+                        className="w-52 rounded-xl border border-border/50 bg-background/95 p-1.5 shadow-xl backdrop-blur-md"
+                      >
                         <DropdownMenuGroup>
-                          <DropdownMenuLabel>{ t("myaccount")}</DropdownMenuLabel>
+                          <DropdownMenuLabel className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                            {t("myaccount")}
+                          </DropdownMenuLabel>
 
-                          <DropdownMenuItem>
+                          <DropdownMenuItem className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus:bg-accent">
                             <Link
                               href="/profile"
-                              className="w-full cursor-pointer"
+                              className="flex w-full items-center"
                             >
-                            { t("profile")}
-                              
+                              {t("profile")}
                             </Link>
                           </DropdownMenuItem>
 
-                          <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>{auth.signout.title}</DropdownMenuItem>
+                          <DropdownMenuItem
+                            className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors focus:bg-destructive/10 focus:text-destructive"
+                            onClick={() => signOut({ callbackUrl: "/login" })}
+                          >
+                            {auth.signout.title}
+                          </DropdownMenuItem>
                         </DropdownMenuGroup>
-
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -347,41 +356,50 @@ const Navbar1 = () => {
                               </Badge>
                             </Link>
 
-                                      <DropdownMenu>
-                      <DropdownMenuTrigger
-                        render={
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="cursor-pointer  hover:bg-white/10 hover:text-white"
-                          />
-                        }
-                      >
-                        <UserRound className="size-7" />
-                      </DropdownMenuTrigger>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger
+                                render={
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="cursor-pointer rounded-full  transition-all duration-200 hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
+                                  />
+                                }
+                              >
+                                <UserRound className="size-6" />
+                              </DropdownMenuTrigger>
 
-                      <DropdownMenuContent>
-                        <DropdownMenuGroup>
-                          <DropdownMenuLabel>{ t("myaccount")}</DropdownMenuLabel>
+                              <DropdownMenuContent
+                                align="end"
+                                sideOffset={8}
+                                className="w-52 rounded-xl border border-border/50 bg-background/95 p-1.5 shadow-xl backdrop-blur-md"
+                              >
+                                <DropdownMenuGroup>
+                                  <DropdownMenuLabel className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                                    {t("myaccount")}
+                                  </DropdownMenuLabel>
 
-                          <DropdownMenuItem>
-                            <Link
-                              href="/profile"
-                              className="w-full cursor-pointer"
-                            >
-                            { t("profile")}
-                              
-                            </Link>
-                          </DropdownMenuItem>
+                                  <DropdownMenuItem className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus:bg-accent">
+                                    <Link
+                                      href="/profile"
+                                      className="flex w-full items-center"
+                                    >
+                                      {t("profile")}
+                                    </Link>
+                                  </DropdownMenuItem>
 
-                          <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>{auth.signout.title}</DropdownMenuItem>
-                        </DropdownMenuGroup>
-
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-
+                                  <DropdownMenuItem
+                                    className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors focus:bg-destructive/10 focus:text-destructive"
+                                    onClick={() =>
+                                      signOut({ callbackUrl: "/login" })
+                                    }
+                                  >
+                                    {auth.signout.title}
+                                  </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </div>
-     
                         </>
                       )}
                     </div>
