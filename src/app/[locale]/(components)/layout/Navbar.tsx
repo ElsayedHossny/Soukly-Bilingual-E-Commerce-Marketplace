@@ -29,6 +29,7 @@ import BtnModeToggle from "../navbar/BtnModeToggle";
 import BtnLanguage from "../navbar/BtnLanguage";
 
 import { signOut, useSession } from "next-auth/react";
+import { useCart } from "@/context/CartContext";
 
 const Navbar1 = () => {
   const locale = useLocale();
@@ -58,6 +59,14 @@ const Navbar1 = () => {
   const { data: sessions, status } = useSession();
 
   // console.log(sessions);
+
+
+
+  const {CartDetails} = useCart();
+
+  // console.log(CartDetails.numOfCartItems);
+  
+
 
   return (
     <div className="sticky top-0 z-50 w-full px-3 py-3 md:px-6">
@@ -167,7 +176,7 @@ const Navbar1 = () => {
                         variant="destructive"
                         className="absolute -right-2 -top-1.5 size-5 font-mono text-white rounded-full p-1 bg-red-600 dark:bg-red-600"
                       >
-                        2
+                        {CartDetails?.numOfCartItems || 0 }
                       </Badge>
                     </Link>
 
@@ -316,7 +325,7 @@ const Navbar1 = () => {
                                 variant="destructive"
                                 className="absolute -right-2 -top-1.5 size-5 font-mono text-white rounded-full p-1 bg-red-600 dark:bg-red-600"
                               >
-                                2
+                                {CartDetails?.numOfCartItems || 0}
                               </Badge>
                             </Link>
 
