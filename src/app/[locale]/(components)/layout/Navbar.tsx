@@ -31,6 +31,16 @@ import BtnLanguage from "../navbar/BtnLanguage";
 import { signOut, useSession } from "next-auth/react";
 import { useCart } from "@/context/CartContext";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 const Navbar1 = () => {
   const locale = useLocale();
   const t = useTranslations("Home.navbar");
@@ -43,7 +53,6 @@ const Navbar1 = () => {
     title: "",
   };
   const navMenu: MenuItem[] = [
-    // { title: "Home", url: "/" },
     { title: t("products"), url: "/product" },
     { title: t("productsOffline"), url: "/productOffline" },
     { title: "Blog", url: "#" },
@@ -60,13 +69,9 @@ const Navbar1 = () => {
 
   // console.log(sessions);
 
-
-
-  const {CartDetails} = useCart();
+  const { CartDetails } = useCart();
 
   // console.log(CartDetails.numOfCartItems);
-  
-
 
   return (
     <div className="sticky top-0 z-50 w-full px-3 py-3 md:px-6">
@@ -176,30 +181,43 @@ const Navbar1 = () => {
                         variant="destructive"
                         className="absolute -right-2 -top-1.5 size-5 font-mono text-white rounded-full p-1 bg-red-600 dark:bg-red-600"
                       >
-                        {CartDetails?.numOfCartItems || 0 }
+                        {CartDetails?.numOfCartItems || 0}
                       </Badge>
                     </Link>
 
-                    <Link
-                      href="/profile"
-                      className="inline-flex  items-center justify-center"
-                    >
-                      <UserRound className="size-7 text-white" />
-                    </Link>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        render={
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="cursor-pointer text-white hover:bg-white/10 hover:text-white"
+                          />
+                        }
+                      >
+                        <UserRound className="size-7" />
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>{ t("myaccount")}</DropdownMenuLabel>
+
+                          <DropdownMenuItem>
+                            <Link
+                              href="/profile"
+                              className="w-full cursor-pointer"
+                            >
+                            { t("profile")}
+                              
+                            </Link>
+                          </DropdownMenuItem>
+
+                          <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>{auth.signout.title}</DropdownMenuItem>
+                        </DropdownMenuGroup>
+
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
-                  {/* <span>{session.user}</span> */}
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => signOut({ callbackUrl: "/login" })}
-                    className={cn(
-                      "cursor-pointer rounded-full border-0 bg-white text-primary hover:bg-white/90",
-                      "dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary-hover",
-                      "transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:focus-visible:ring-offset-background font-extrabold",
-                    )}
-                  >
-                    {auth.signout.title}
-                  </Button>
                 </>
               )}
             </div>
@@ -329,24 +347,41 @@ const Navbar1 = () => {
                               </Badge>
                             </Link>
 
+                                      <DropdownMenu>
+                      <DropdownMenuTrigger
+                        render={
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="cursor-pointer  hover:bg-white/10 hover:text-white"
+                          />
+                        }
+                      >
+                        <UserRound className="size-7" />
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>{ t("myaccount")}</DropdownMenuLabel>
+
+                          <DropdownMenuItem>
                             <Link
                               href="/profile"
-                              className="inline-flex  items-center justify-center"
+                              className="w-full cursor-pointer"
                             >
-                              <UserRound className="size-7 " />
+                            { t("profile")}
+                              
                             </Link>
+                          </DropdownMenuItem>
+
+                          <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>{auth.signout.title}</DropdownMenuItem>
+                        </DropdownMenuGroup>
+
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+
                           </div>
-                          <Button
-                            onClick={() => signOut({ callbackUrl: "/login" })}
-                            variant="secondary"
-                            className={cn(
-                              buttonVariants({ size: "sm" }),
-                              "rounded-full",
-                              "font-extrabold",
-                            )}
-                          >
-                            {auth.signout.title}
-                          </Button>
+     
                         </>
                       )}
                     </div>

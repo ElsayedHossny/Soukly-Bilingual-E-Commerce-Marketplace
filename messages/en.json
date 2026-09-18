@@ -107,7 +107,9 @@
       "productsOffline": "Shop_Offline",
       "Login": "Login",
       "Sign_up": "Sign Up",
-      "Sign_Out": "Sign Out"
+      "Sign_Out": "Sign Out",
+      "profile":"profile",
+      "myaccount" : "My Account"
     },
     "Hero": {
       "badge": "New Collection",
