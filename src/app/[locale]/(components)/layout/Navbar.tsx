@@ -208,17 +208,17 @@ const Navbar1 = () => {
                             {t("myaccount")}
                           </DropdownMenuLabel>
 
-                          <DropdownMenuItem className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus:bg-accent">
+                          <DropdownMenuItem className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
                             <Link
                               href="/profile"
-                              className="flex w-full items-center"
+                              className="w-full cursor-pointer"
                             >
                               {t("profile")}
                             </Link>
                           </DropdownMenuItem>
 
                           <DropdownMenuItem
-                            className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors focus:bg-destructive/10 focus:text-destructive"
+                            className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive focus:bg-destructive/10 focus:text-destructive"
                             onClick={() => signOut({ callbackUrl: "/login" })}
                           >
                             {auth.signout.title}
@@ -362,7 +362,7 @@ const Navbar1 = () => {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="cursor-pointer rounded-full  transition-all duration-200 hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
+                                    className="cursor-pointer rounded-full text-white transition-all duration-200 hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
                                   />
                                 }
                               >
@@ -379,17 +379,17 @@ const Navbar1 = () => {
                                     {t("myaccount")}
                                   </DropdownMenuLabel>
 
-                                  <DropdownMenuItem className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus:bg-accent">
+                                  <DropdownMenuItem className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
                                     <Link
                                       href="/profile"
-                                      className="flex w-full items-center"
+                                      className="w-full cursor-pointer"
                                     >
                                       {t("profile")}
                                     </Link>
                                   </DropdownMenuItem>
 
                                   <DropdownMenuItem
-                                    className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors focus:bg-destructive/10 focus:text-destructive"
+                                    className="cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive focus:bg-destructive/10 focus:text-destructive"
                                     onClick={() =>
                                       signOut({ callbackUrl: "/login" })
                                     }
