@@ -14,17 +14,33 @@ import { Input } from "@/components/ui/input";
 import { CustomButton } from "@/components/ui/button copy";
 import { useCart } from "@/context/CartContext";
 import { ICartProduct } from "@/interface/cart.interface";
+import { removeAllItems } from "@/services/cart.service";
+import { toast } from "sonner";
+import { ShoppingCartIcon } from "lucide-react";
 
 export default function Cart() {
-  const { CartDetails } = useCart();
-
-  console.log(CartDetails?.data?.products);
-
+  const { CartDetails, setCartDetails } = useCart();
   const ProductsCart: ICartProduct[] = CartDetails?.data?.products ?? [];
 
+  async function removeUserCart() {
+    try {
+      const res = await removeAllItems();
+      if (res?.message === "success") {
+        toast.success("Cart remove successfully");
+        setCartDetails(null);
+        return;
+      }
+      toast.error(res?.message || "Something went wrong");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  }
+
+  console.log("CartDetails", CartDetails);
+
   return (
-    <div className="container mx-auto mt-6 px-3 sm:mt-10 sm:px-6">
-      {CartDetails && (
+    <div className="container mx-auto mt-6 mb-12 px-3 sm:mt-10 sm:px-6">
+      {CartDetails?.numOfCartItems ? (
         <>
           <section className="mb-12 sm:mb-20">
             <div className="w-full overflow-x-auto rounded-lg border border-border bg-card shadow-sm">
@@ -59,13 +75,9 @@ export default function Cart() {
                         <div className="flex min-w-[250px] items-center gap-3 sm:gap-5">
                           <Image
                             src={
-                              product.product?.imageCover ??
-                              "/placeholder.png"
+                              product.product?.imageCover ?? "/placeholder.png"
                             }
-                            alt={
-                              product.product?.title ??
-                              "Product thumbnail"
-                            }
+                            alt={product.product?.title ?? "Product thumbnail"}
                             height={54}
                             width={54}
                             className="size-12 shrink-0 rounded-md border border-border object-cover sm:size-[54px]"
@@ -87,10 +99,9 @@ export default function Cart() {
 
                       <TableCell className="whitespace-nowrap px-3 text-end text-sm font-semibold text-foreground sm:px-5 sm:text-base">
                         $
-                        {(
-                          (product.price ?? 0) *
-                          (product.count ?? 0)
-                        ).toFixed(2)}
+                        {((product.price ?? 0) * (product.count ?? 0)).toFixed(
+                          2,
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -108,7 +119,10 @@ export default function Cart() {
 
               <CustomButton
                 variant={"destructive"}
-                className="w-full px-6 py-4 sm:w-auto"
+                className="w-full px-6 py-4 sm:w-auto cursor-pointer"
+                onClick={async () => {
+                  await removeUserCart();
+                }}
               >
                 Remove All
               </CustomButton>
@@ -142,7 +156,9 @@ export default function Cart() {
                   </span>
 
                   <span className="whitespace-nowrap text-sm font-medium text-foreground sm:text-base">
-                    $1500
+                    {CartDetails?.data?.totalCartPrice
+                      ? `$${CartDetails.data.totalCartPrice.toFixed(2)}`
+                      : "$0.00"}
                   </span>
                 </li>
 
@@ -160,7 +176,9 @@ export default function Cart() {
                   <span className="text-foreground">Total:</span>
 
                   <span className="whitespace-nowrap text-foreground">
-                    $1500
+                    {CartDetails?.data?.totalCartPrice
+                      ? `$${CartDetails.data.totalCartPrice.toFixed(2)}`
+                      : "$0.00"}
                   </span>
                 </li>
               </ul>
@@ -174,8 +192,31 @@ export default function Cart() {
             </div>
           </section>
         </>
+      ) : (
+        <div className="flex min-h-[420px] flex-col items-center justify-center rounded-2xl border border-border/60 bg-muted/20 px-6 py-12 text-center shadow-sm">
+          <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10">
+            <ShoppingCartIcon className="h-12 w-12 text-primary" />
+          </div>
+
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            Your Cart is Empty
+          </h2>
+
+          <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground sm:text-base">
+            Looks like you haven&apos;t added anything to your cart yet. Start
+            shopping and discover something you&apos;ll love.
+          </p>
+
+          <div className="mt-8">
+            <CustomButton
+              variant="outline"
+              className="h-11 rounded-lg bg-primary px-7 font-medium text-white shadow-sm transition-all duration-200 hover:bg-primary/90 hover:text-white hover:shadow-md"
+            >
+              <Link href="/product">Return To Shop</Link>
+            </CustomButton>
+          </div>
+        </div>
       )}
     </div>
   );
 }
-

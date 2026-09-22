@@ -37,7 +37,6 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -73,15 +72,17 @@ const Navbar1 = () => {
 
   // console.log(CartDetails.numOfCartItems);
 
+  // px-3 py-3 md:px-6
+
   return (
-    <div className="sticky top-0 z-50 w-full px-3 py-3 md:px-6">
+    <div className="top-0 z-50 w-full ">
       <section
         dir={isRtl ? "rtl" : "ltr"}
         className={cn(
-          "mx-auto max-w-7xl rounded-full border transition-all duration-300",
           "border-primary-hover/40 bg-primary",
+          // "mx-auto max-w-7xl rounded-full border transition-all duration-300",
           "dark:border-border dark:bg-surface",
-          "py-3 shadow-lg backdrop-blur-md dark:bg-surface/90",
+          "py-4 backdrop-blur-md dark:bg-surface/90",
         )}
       >
         <div className="px-4 md:px-6">
@@ -95,7 +96,7 @@ const Navbar1 = () => {
                   width={100}
                   height={100}
                   priority
-                  className="h-12 w-40 rounded-2xl bg-white p-0.5"
+                  className="h-12 w-32 rounded-2xl bg-white p-0.5"
                 />
                 {logo.title && (
                   <span className="text-lg font-semibold tracking-tighter text-primary-foreground dark:text-foreground">

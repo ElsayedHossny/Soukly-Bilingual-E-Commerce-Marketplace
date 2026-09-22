@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 interface ICartContext{
   CartDetails : ICartResponse | null;
+  setCartDetails: React.Dispatch<React.SetStateAction<ICartResponse | null>>;
 }
 
 const CartContext = createContext<ICartContext | null>(null);
@@ -23,7 +24,7 @@ useEffect(() => {
   getCart();
 }, []);
 
-  return <CartContext.Provider value={{CartDetails}}>{children}</CartContext.Provider>;
+  return <CartContext.Provider value={{CartDetails,setCartDetails}}>{children}</CartContext.Provider>;
 }
 
 

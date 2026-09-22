@@ -32,5 +32,6 @@ export async function getUserToken() {
     secret: process.env.NEXTAUTH_SECRET!,
   });
 
+  // console.log("Decoded Token:", decodedToken?.token)
   return decodedToken?.token;
 }

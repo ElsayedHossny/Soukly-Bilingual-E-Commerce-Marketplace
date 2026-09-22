@@ -39,7 +39,7 @@ export default function MainSlider() {
     <Swiper
       dir={isRtl ? "ltr" : "rtl"}
       {...swiperConfig}
-      className="[&_.swiper-pagination-bullet]:bg-white/60 [&_.swiper-pagination-bullet]:opacity-100"
+      className="[&_.swiper-pagination-bullet]:bg-white/60 mt-6 [&_.swiper-pagination-bullet]:opacity-100"
     >
       {slides.map((img, index) => (
         <SwiperSlide
