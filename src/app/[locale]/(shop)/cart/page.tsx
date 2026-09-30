@@ -36,7 +36,7 @@ export default function Cart() {
     }
   }
 
-  console.log("CartDetails", CartDetails);
+  // console.log("CartDetails", CartDetails);
 
   return (
     <div className="container mx-auto mt-6 mb-12 px-3 sm:mt-10 sm:px-6">

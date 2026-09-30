@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { IProduct } from "@/interface/products.interface";
 import { Button } from "@/components/ui/button";
+import AddtoCartBtn from "../products/AddtoCartBtn";
 
 interface ProductCardRouteProps {
   product: IProduct;
@@ -135,14 +136,10 @@ export default async function ProductCardRoute({
         </div>
       </Link>
 
-      <Button
-        type="button"
-        disabled={isOutOfStock}
-        className=" cursor-pointer absolute bottom-0 w-full translate-y-full rounded-t-none transition-transform duration-300 ease-out group-hover:translate-y-0 disabled:pointer-events-none disabled:opacity-60"
-      >
-        <ShoppingCart className="h-4 w-4" />
-        {t("addToCart")}
-      </Button>
+<div className="absolute bottom-0 w-full translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0">
+  <AddtoCartBtn id={product._id} />
+</div>
+
     </div>
   );
 }

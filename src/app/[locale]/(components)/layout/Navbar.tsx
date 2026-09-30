@@ -70,7 +70,7 @@ const Navbar1 = () => {
 
   const { CartDetails } = useCart();
 
-  // console.log(CartDetails.numOfCartItems);
+  console.log("Navbar::::", CartDetails);
 
   // px-3 py-3 md:px-6
 

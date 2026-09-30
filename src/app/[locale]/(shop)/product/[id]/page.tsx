@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { IProduct } from "@/interface/products.interface";
 import { getSpecificProductRoute } from "@/services/Products.service";
-import { ShoppingCartIcon, Star } from "lucide-react";
-import { toast } from "sonner";
 import { getTranslations } from "next-intl/server";
 import ProductDetailsSwiper from "@/app/[locale]/(components)/products/ProductDetailsSwiper";
-import { addItemToCart } from "@/services/cart.service";
+import AddtoCartBtn from '../../../(components)/products/AddtoCartBtn';
+import { Star } from "lucide-react";
+
 
 type PageProps = {
   params: {
@@ -23,19 +22,6 @@ export default async function Productdetails({ params }: PageProps) {
   const dir = locale === "ar" ? "rtl" : "ltr";
   const rating = Math.min(5, product.ratingsQuantity);
 
-
-  async function handleAddToCart(productId: string) {
-    try {
-      const res = await addItemToCart(productId);
-      if (res?.message === "success") {
-        toast.success("Product added to cart successfully");
-        return;
-      }
-      toast.error(res?.message || "Something went wrong");
-    } catch (error) {
-      toast.error("Something went wrong");
-    }
-  }
 
 
   return (
@@ -91,14 +77,7 @@ export default async function Productdetails({ params }: PageProps) {
             </p>
 
             <div className="h-px w-full bg-border" />
-
-            <Button
-              className="w-full cursor-pointer gap-2 rounded-full bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90 hover:shadow-md sm:w-fit sm:px-10"
-
-            >
-              <ShoppingCartIcon className="h-5 w-5" />
-              {t("buyNow")}
-            </Button>
+              <AddtoCartBtn id={product._id}/>
           </div>
         </div>
       </div>
