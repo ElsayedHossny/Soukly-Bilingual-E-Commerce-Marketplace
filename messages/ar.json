@@ -3,6 +3,7 @@
     "register": {
       "title": "إنشاء حساب",
       "description": "أنشئ حسابك وكمّل التسوق"
+      "sas":"sasa"
     },
     "fields": {
       "name": {
